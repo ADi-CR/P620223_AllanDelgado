@@ -52,10 +52,38 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FrmPrincipalMDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FrmPrincipalMDI.Designer.cs">
+      <DependentUpon>FrmPrincipalMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FrmUsuariosGestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FrmUsuariosGestion.Designer.cs">
+      <DependentUpon>FrmUsuariosGestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globales.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FrmPrincipalMDI.resx">
+      <DependentUpon>FrmPrincipalMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FrmUsuariosGestion.resx">
+      <DependentUpon>FrmUsuariosGestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -65,6 +93,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -80,7 +109,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Formularios\" />
     <Folder Include="Reportes\" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +116,24 @@
       <Project>{add3f562-fd2f-4e41-9a22-7dd40ee9a275}</Project>
       <Name>Logica</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\proc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\repo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
