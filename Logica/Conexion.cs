@@ -119,7 +119,7 @@ namespace Logica
         //una instancia nueva de la clase.
         public Conexion()
         {
-            this.CadenaDeConexion = ConfigurationManager.ConnectionStrings["CNNSTR"].ToString();
+            this.CadenaDeConexion = ConfigurationManager.ConnectionStrings["CnnStr"].ToString();
         }
 
     }
