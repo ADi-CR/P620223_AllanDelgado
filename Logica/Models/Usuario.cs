@@ -148,21 +148,16 @@ namespace Logica.Models
             return R;
         }
 
-        public DataTable ListarActivos()
+        public DataTable Listar(bool VerActivos = true, string FiltroBusqueda = "")
         {
             DataTable R = new DataTable();
 
-            //TODO: hay que programar la llamada al SP que retorna datos 
+            Conexion MiCnn = new Conexion();
 
-            return R;
-        }
+            MiCnn.ListaParametros.Add(new SqlParameter("@VerActivos", VerActivos));
+            MiCnn.ListaParametros.Add(new SqlParameter("@FiltroBusqueda", FiltroBusqueda));
 
-        public DataTable ListarInactivos()
-        {
-            DataTable R = new DataTable();
-
-            //TODO: hay que programar la llamada al SP que retorna datos 
-
+            R = MiCnn.EjecutarSelect("SPUsuarioListar");
 
             return R;
         }
