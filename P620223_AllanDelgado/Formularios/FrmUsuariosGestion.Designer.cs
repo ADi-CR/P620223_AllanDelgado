@@ -37,6 +37,12 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.CbVerActivos = new System.Windows.Forms.CheckBox();
             this.DgvLista = new System.Windows.Forms.DataGridView();
+            this.CIDUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CCedula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CNombreEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.BtnAgregar = new System.Windows.Forms.Button();
             this.BtnModificar = new System.Windows.Forms.Button();
@@ -63,12 +69,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TxtCodigo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.CIDUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CCedula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CNombreEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -185,6 +185,7 @@
             this.CbVerActivos.TabIndex = 2;
             this.CbVerActivos.Text = "Ver Usuarios Activos";
             this.CbVerActivos.UseVisualStyleBackColor = true;
+            this.CbVerActivos.CheckedChanged += new System.EventHandler(this.CbVerActivos_CheckedChanged);
             // 
             // DgvLista
             // 
@@ -209,6 +210,57 @@
             this.DgvLista.Size = new System.Drawing.Size(941, 285);
             this.DgvLista.TabIndex = 3;
             this.DgvLista.VirtualMode = true;
+            this.DgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvLista_CellClick);
+            this.DgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvLista_DataBindingComplete);
+            // 
+            // CIDUsuario
+            // 
+            this.CIDUsuario.DataPropertyName = "IDUsuario";
+            this.CIDUsuario.HeaderText = "Código Usuario";
+            this.CIDUsuario.Name = "CIDUsuario";
+            this.CIDUsuario.ReadOnly = true;
+            // 
+            // CNombre
+            // 
+            this.CNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CNombre.DataPropertyName = "Nombre";
+            this.CNombre.HeaderText = "Nombre";
+            this.CNombre.Name = "CNombre";
+            this.CNombre.ReadOnly = true;
+            // 
+            // CCedula
+            // 
+            this.CCedula.DataPropertyName = "Cedula";
+            this.CCedula.HeaderText = "Cédula";
+            this.CCedula.Name = "CCedula";
+            this.CCedula.ReadOnly = true;
+            // 
+            // CEmail
+            // 
+            this.CEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CEmail.DataPropertyName = "Email";
+            this.CEmail.HeaderText = "Correo";
+            this.CEmail.Name = "CEmail";
+            this.CEmail.ReadOnly = true;
+            this.CEmail.Width = 180;
+            // 
+            // CNombreEmpresa
+            // 
+            this.CNombreEmpresa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CNombreEmpresa.DataPropertyName = "NombreEmpresa";
+            this.CNombreEmpresa.HeaderText = "Empresa";
+            this.CNombreEmpresa.Name = "CNombreEmpresa";
+            this.CNombreEmpresa.ReadOnly = true;
+            this.CNombreEmpresa.Width = 180;
+            // 
+            // CRol
+            // 
+            this.CRol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CRol.DataPropertyName = "Rol";
+            this.CRol.HeaderText = "Rol Usuario";
+            this.CRol.Name = "CRol";
+            this.CRol.ReadOnly = true;
+            this.CRol.Width = 180;
             // 
             // tableLayoutPanel4
             // 
@@ -258,6 +310,7 @@
             this.BtnModificar.TabIndex = 1;
             this.BtnModificar.Text = "Modificar";
             this.BtnModificar.UseVisualStyleBackColor = false;
+            this.BtnModificar.Click += new System.EventHandler(this.BtnModificar_Click);
             // 
             // BtnEliminar
             // 
@@ -272,6 +325,7 @@
             this.BtnEliminar.TabIndex = 2;
             this.BtnEliminar.Text = "Eliminar";
             this.BtnEliminar.UseVisualStyleBackColor = false;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // BtnLimpiar
             // 
@@ -338,6 +392,7 @@
             // CbActivo
             // 
             this.CbActivo.AutoSize = true;
+            this.CbActivo.Enabled = false;
             this.CbActivo.Location = new System.Drawing.Point(360, 164);
             this.CbActivo.Name = "CbActivo";
             this.CbActivo.Size = new System.Drawing.Size(63, 20);
@@ -501,55 +556,6 @@
             this.label2.Size = new System.Drawing.Size(51, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "Código";
-            // 
-            // CIDUsuario
-            // 
-            this.CIDUsuario.DataPropertyName = "IDUsuario";
-            this.CIDUsuario.HeaderText = "Código Usuario";
-            this.CIDUsuario.Name = "CIDUsuario";
-            this.CIDUsuario.ReadOnly = true;
-            // 
-            // CNombre
-            // 
-            this.CNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CNombre.DataPropertyName = "Nombre";
-            this.CNombre.HeaderText = "Nombre";
-            this.CNombre.Name = "CNombre";
-            this.CNombre.ReadOnly = true;
-            // 
-            // CCedula
-            // 
-            this.CCedula.DataPropertyName = "Cedula";
-            this.CCedula.HeaderText = "Cédula";
-            this.CCedula.Name = "CCedula";
-            this.CCedula.ReadOnly = true;
-            // 
-            // CEmail
-            // 
-            this.CEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CEmail.DataPropertyName = "Email";
-            this.CEmail.HeaderText = "Correo";
-            this.CEmail.Name = "CEmail";
-            this.CEmail.ReadOnly = true;
-            this.CEmail.Width = 180;
-            // 
-            // CNombreEmpresa
-            // 
-            this.CNombreEmpresa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CNombreEmpresa.DataPropertyName = "NombreEmpresa";
-            this.CNombreEmpresa.HeaderText = "Empresa";
-            this.CNombreEmpresa.Name = "CNombreEmpresa";
-            this.CNombreEmpresa.ReadOnly = true;
-            this.CNombreEmpresa.Width = 180;
-            // 
-            // CRol
-            // 
-            this.CRol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CRol.DataPropertyName = "Rol";
-            this.CRol.HeaderText = "Rol Usuario";
-            this.CRol.Name = "CRol";
-            this.CRol.ReadOnly = true;
-            this.CRol.Width = 180;
             // 
             // FrmUsuariosGestion
             // 
