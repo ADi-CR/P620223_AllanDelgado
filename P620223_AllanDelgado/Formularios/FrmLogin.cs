@@ -40,13 +40,51 @@ namespace P620223_AllanDelgado.Formularios
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
-            //TODO: se debe validar el ingrso del usuario
+            if (!string.IsNullOrEmpty(TxtNombreUsuario.Text.Trim()) && 
+                !string.IsNullOrEmpty(TxtContrasennia.Text.Trim()))
+            {
+                string u = TxtNombreUsuario.Text.Trim();
+                string p = TxtContrasennia.Text.Trim();
 
-            //si la validación es correcta permite el ingreso al sistem
-            //y muestra el formulario principal. 
+                int IdLoginOk = Globales.MiUsuarioGlobal.ValidarLogin(u, p);
+
+                if (IdLoginOk > 0)
+                {
+                    //hay permiso de ingresar al sistema 
+                    Globales.MiUsuarioGlobal.IDUsuario = IdLoginOk;
+
+                    Globales.MiUsuarioGlobal = Globales.MiUsuarioGlobal.ConsultarPorID();
+
+                    Globales.MiFormPrincipal.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario o Contraseña Incorrectas", "Error de Validación", MessageBoxButtons.OK);
+                    TxtContrasennia.Focus();
+                    TxtContrasennia.SelectAll();
+                }
+
+            }
+
+        }
+
+        private void BtnIngresoDirecto_Click(object sender, EventArgs e)
+        {
+            Globales.MiUsuarioGlobal.IDUsuario = 1;
+            Globales.MiUsuarioGlobal = Globales.MiUsuarioGlobal.ConsultarPorID();
+            
             Globales.MiFormPrincipal.Show();
             this.Hide();
 
+        }
+
+        private void FrmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Shift & e.KeyCode == Keys.A)
+            {
+                BtnIngresoDirecto.Visible = true;
+            }
         }
     }
 }

@@ -19,6 +19,51 @@ namespace P620223_AllanDelgado.Formularios
 
         private void FrmPrincipalMDI_Load(object sender, EventArgs e)
         {
+            //mostrar el usuario que está logueado en el sistema. 
+            string InfoUsuario = string.Format("{0}({1})",
+                                    Globales.MiUsuarioGlobal.Nombre,
+                                    Globales.MiUsuarioGlobal.MiRol.Rol);
+
+            LblUsuarioLogueado.Text = InfoUsuario;
+
+            //se debe filtrar las opciones de acceso a menus según el rol que 
+            //tenga el usuario 
+
+            switch (Globales.MiUsuarioGlobal.MiRol.IDUsuarioRol)
+            {
+                case 1:
+                    //no hace falta ocultar opciones ya que es admin
+                break;
+
+                case 2:
+                    //sería tipo bodeguero
+                    MnuProcesos.Visible= false;
+                    
+                    MnuUsuariosGestion.Visible= false;
+                    MnuImpuestosGestion.Visible= false;
+                    MnuClientesGestion.Visible= false;
+
+                    MnuListaClientes.Visible= false;
+                    MnuFacturasReimpresion.Visible= false;
+                    MnuVentasCliente.Visible= false;
+                    MnuVentasRangoFechas.Visible= false;
+                    MnuVentasUsuario.Visible= false;
+                break;
+
+                case 3:
+                    //sería facturador
+                    MnuUsuariosGestion.Visible= false;
+                    MnuImpuestosGestion.Visible= false;
+                    MnuInventarioGestion.Visible= false;
+                    MnuCategoriasGestion.Visible= false;
+                    MnuProveedoresGestion.Visible= false;
+
+                    MnuListaProveedores.Visible= false;
+
+                break;
+            }
+
+            TmrFechaHora.Enabled = true;
 
         }
 
@@ -46,6 +91,18 @@ namespace P620223_AllanDelgado.Formularios
                 Globales.MiFormMantUsuarios = new FrmUsuariosGestion();
                 Globales.MiFormMantUsuarios.Show();
             }
+
+        }
+
+        private void TmrFechaHora_Tick(object sender, EventArgs e)
+        {
+            //Asignar al label de fecha y hora el valor en formato extendido de la fecha
+            // y además la hora 
+
+            string fecha = DateTime.Now.Date.ToLongDateString();
+            string hora = DateTime.Now.ToLongTimeString();
+
+            LblFechaYHora.Text = fecha + "/" + hora;
 
         }
     }

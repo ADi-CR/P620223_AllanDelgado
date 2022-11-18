@@ -20,5 +20,7 @@ namespace P620223_AllanDelgado
 
         public static Formularios.FrmUsuariosGestion MiFormMantUsuarios = new Formularios.FrmUsuariosGestion();
 
+        public static Logica.Models.Usuario MiUsuarioGlobal = new Logica.Models.Usuario();
+
     }
 }
