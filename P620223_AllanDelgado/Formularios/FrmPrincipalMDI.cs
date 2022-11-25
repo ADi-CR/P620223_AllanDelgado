@@ -105,5 +105,15 @@ namespace P620223_AllanDelgado.Formularios
             LblFechaYHora.Text = fecha + "/" + hora;
 
         }
+
+        private void MnuFacturacion_Click(object sender, EventArgs e)
+        {
+            if (!Globales.MiFormFacturacion.Visible)
+            {
+                Globales.MiFormFacturacion = new FrmFacturacion(); 
+                Globales.MiFormFacturacion.Show();
+
+            }
+        }
     }
 }

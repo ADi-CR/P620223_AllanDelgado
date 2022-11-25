@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,12 +68,33 @@ namespace Logica.Models
             return R;
         }
 
-        public Cliente ConsultarPorID()
+        public Cliente ConsultarPorID(int pIdCliente)
         {
             Cliente R = new Cliente();
-            //TODO: En este caso el retorno es del mismo tipo de la clase. 
-            //por lo tanto hay que llenar los atributos con los datos
-            //que entregue un SP Select
+
+            Conexion MyCnn = new Conexion();
+
+            MyCnn.ListaParametros.Add(new SqlParameter("@ID", pIdCliente));
+
+            DataTable DataCliente = new DataTable();
+            DataCliente = MyCnn.EjecutarSelect("SPClienteConsultarPorID");
+
+            //Una vez tenemos un datatable con la data procedemos a llenar las
+            //propiedades del objeto de retono. 
+
+            if (DataCliente != null && DataCliente.Rows.Count > 0)
+            {
+                DataRow Fila = DataCliente.Rows[0];
+
+                R.IDCliente = Convert.ToInt32(Fila["IdCliente"]);
+                R.Nombre = Convert.ToString(Fila["Nombre"]);
+                R.Cedula = Convert.ToString(Fila["Cedula"]);
+                R.CorreoElectronico = Convert.ToString(Fila["CorreoElectronico"]);
+                R.Telefono = Convert.ToString(Fila["Telefono"]);
+                R.Direccion = Convert.ToString(Fila["Direccion"]);
+                R.MiEmpresa.IDEmpresa = Convert.ToInt32(Fila["IDEmpresa"]);
+                R.Activo = Convert.ToBoolean(Fila["Activo"]);
+            }
 
             return R;
         }
@@ -86,10 +108,16 @@ namespace Logica.Models
             return R;
         }
 
-        public DataTable Listar(bool VerActivos = true)
+        public DataTable Listar(bool VerActivos = true, string Filtro = "")
         {
             DataTable R = new DataTable();
-            //TODO. Usar SP con parámetro para ver proveedores eliminados o activos
+            
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListaParametros.Add(new SqlParameter("@VerActivos", VerActivos));
+            MiCnn.ListaParametros.Add(new SqlParameter("@FiltroBusqueda", Filtro));
+
+            R = MiCnn.EjecutarSelect("SPClienteListar");
 
             return R;
         }
