@@ -31,12 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TxtBuscar = new System.Windows.Forms.TextBox();
             this.DgvLista = new System.Windows.Forms.DataGridView();
-            this.BtnSeleccionar = new System.Windows.Forms.Button();
-            this.BtnCancelar = new System.Windows.Forms.Button();
             this.CIDCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCedula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnSeleccionar = new System.Windows.Forms.Button();
+            this.BtnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvLista)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,34 +73,6 @@
             this.DgvLista.TabIndex = 1;
             this.DgvLista.VirtualMode = true;
             // 
-            // BtnSeleccionar
-            // 
-            this.BtnSeleccionar.BackColor = System.Drawing.Color.Green;
-            this.BtnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSeleccionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSeleccionar.ForeColor = System.Drawing.Color.White;
-            this.BtnSeleccionar.Location = new System.Drawing.Point(403, 266);
-            this.BtnSeleccionar.Name = "BtnSeleccionar";
-            this.BtnSeleccionar.Size = new System.Drawing.Size(180, 41);
-            this.BtnSeleccionar.TabIndex = 2;
-            this.BtnSeleccionar.Text = "Seleccionar";
-            this.BtnSeleccionar.UseVisualStyleBackColor = false;
-            this.BtnSeleccionar.Click += new System.EventHandler(this.BtnSeleccionar_Click);
-            // 
-            // BtnCancelar
-            // 
-            this.BtnCancelar.BackColor = System.Drawing.Color.Firebrick;
-            this.BtnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancelar.ForeColor = System.Drawing.Color.White;
-            this.BtnCancelar.Location = new System.Drawing.Point(264, 266);
-            this.BtnCancelar.Name = "BtnCancelar";
-            this.BtnCancelar.Size = new System.Drawing.Size(108, 41);
-            this.BtnCancelar.TabIndex = 3;
-            this.BtnCancelar.Text = "Cancelar";
-            this.BtnCancelar.UseVisualStyleBackColor = false;
-            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
-            // 
             // CIDCliente
             // 
             this.CIDCliente.DataPropertyName = "IDCliente";
@@ -129,6 +101,34 @@
             this.CTelefono.HeaderText = "Teléfono";
             this.CTelefono.Name = "CTelefono";
             this.CTelefono.ReadOnly = true;
+            // 
+            // BtnSeleccionar
+            // 
+            this.BtnSeleccionar.BackColor = System.Drawing.Color.Green;
+            this.BtnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSeleccionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSeleccionar.ForeColor = System.Drawing.Color.White;
+            this.BtnSeleccionar.Location = new System.Drawing.Point(416, 266);
+            this.BtnSeleccionar.Name = "BtnSeleccionar";
+            this.BtnSeleccionar.Size = new System.Drawing.Size(180, 41);
+            this.BtnSeleccionar.TabIndex = 2;
+            this.BtnSeleccionar.Text = "Seleccionar";
+            this.BtnSeleccionar.UseVisualStyleBackColor = false;
+            this.BtnSeleccionar.Click += new System.EventHandler(this.BtnSeleccionar_Click);
+            // 
+            // BtnCancelar
+            // 
+            this.BtnCancelar.BackColor = System.Drawing.Color.Firebrick;
+            this.BtnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancelar.ForeColor = System.Drawing.Color.White;
+            this.BtnCancelar.Location = new System.Drawing.Point(264, 266);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(108, 41);
+            this.BtnCancelar.TabIndex = 3;
+            this.BtnCancelar.Text = "Cancelar";
+            this.BtnCancelar.UseVisualStyleBackColor = false;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // FrmClienteBuscar
             // 
