@@ -21,6 +21,10 @@ namespace P620223_AllanDelgado.Formularios
         public decimal SubTotal2 { get; set; }
         public decimal TotalImpuesto { get; set; }
         public decimal Total { get; set; }
+        public decimal PrecioUnitario { set; get; }
+        public decimal TasaImpuesto { get; set; }
+        public decimal PorcentajeDescuento { get; set; }
+        public decimal Cantidad { get; set; }
         #endregion
 
         public FrmInventarioBuscar()
@@ -51,6 +55,8 @@ namespace P620223_AllanDelgado.Formularios
 
         private void DgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Limpiar();
+
             if (DgvLista.SelectedRows.Count == 1)
             {
                 DataGridViewRow fila = DgvLista.SelectedRows[0];
@@ -61,6 +67,7 @@ namespace P620223_AllanDelgado.Formularios
                 TxtIVA.Text = IVA.ToString();
                 TxtPrecioUnitario.Text = Precio.ToString();
 
+                Calcular();
             }
         }
 
@@ -95,9 +102,53 @@ namespace P620223_AllanDelgado.Formularios
             //no supere el 100%
             if (ValidarDescuento())
             {
+                Cantidad = Convert.ToDecimal(NudCantidad.Value);
+                PorcentajeDescuento = Convert.ToDecimal(TxtDescuento.Text.Trim());
+
+                PrecioUnitario = Convert.ToDecimal(TxtPrecioUnitario.Text.Trim());
+                TasaImpuesto = Convert.ToDecimal(TxtIVA.Text.Trim());
+
+                //1. Canculo del Subtotal 
+                SubTotal1 = Cantidad * PrecioUnitario;
+
+                if (PorcentajeDescuento > 0)
+                {
+                    TotalDescuento = (SubTotal1 * PorcentajeDescuento) / 100;
+                }
+
+                SubTotal2 = SubTotal1 - TotalDescuento;
+
+                if (TasaImpuesto > 0)
+                {
+                    TotalImpuesto = (SubTotal2 * TasaImpuesto) / 100;
+                }
+
+                Total = SubTotal2 + TotalImpuesto;
+
+                TxtTotal.Text = string.Format("{0:N2}", Total);
 
             }
         
+        }
+
+        private void Limpiar()
+        {
+            SubTotal1 = 0;
+            TotalDescuento = 0;
+            SubTotal2 = 0;
+            TotalImpuesto = 0;
+            Total = 0;
+            PrecioUnitario = 0;
+            TasaImpuesto = 0;
+            PorcentajeDescuento = 0;
+            Cantidad = 0;
+
+            NudCantidad.Value = 1;
+            TxtPrecioUnitario.Text = "0";
+            TxtDescuento.Text = "0";
+            TxtIVA.Text = "0";
+            TxtTotal.Text = "0";
+
         }
 
         private bool ValidarDescuento()
@@ -138,6 +189,51 @@ namespace P620223_AllanDelgado.Formularios
         private void TxtDescuento_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Validaciones.CaracteresNumeros(e, false);
+        }
+
+        private void NudCantidad_ValueChanged(object sender, EventArgs e)
+        {
+            Calcular();
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void BtnSeleccionar_Click(object sender, EventArgs e)
+        {
+            if (DgvLista.SelectedRows.Count == 1 && 
+                !string.IsNullOrEmpty(TxtTotal.Text.Trim()) && 
+                Convert.ToDecimal(TxtTotal.Text.Trim()) > 0)
+            {
+                DataGridViewRow r = DgvLista.SelectedRows[0];
+
+                //estos dos valores se leen directamente de la selección del dgvLista
+                //los demás ya los teníamos calculados en la props locales de totalización 
+
+                int IdItem = Convert.ToInt32(r.Cells["CIDInventario"].Value);
+                string NombreItem = Convert.ToString(r.Cells["CNombreItem"].Value);
+
+                DataRow NuevaFilaEnFacturacion = Globales.MiFormFacturacion.DtListaItems.NewRow();
+
+                NuevaFilaEnFacturacion["IDInventario"] = IdItem;
+                NuevaFilaEnFacturacion["NombreItem"] = NombreItem;
+                NuevaFilaEnFacturacion["PrecioVenta"] = PrecioUnitario;
+
+                NuevaFilaEnFacturacion["Cantidad"] = Cantidad;
+                NuevaFilaEnFacturacion["TasaImpuesto"] = TasaImpuesto;
+                NuevaFilaEnFacturacion["PorcentajeDescuento"] = PorcentajeDescuento;
+                NuevaFilaEnFacturacion["SubTotal"] = SubTotal1;
+                NuevaFilaEnFacturacion["SubTotal2"] = SubTotal2;
+                NuevaFilaEnFacturacion["ImpuestosTotal"] = TotalImpuesto;
+                NuevaFilaEnFacturacion["TotalLinea"] = Total;
+                NuevaFilaEnFacturacion["DescuentoTotal"] = TotalDescuento;
+                
+                Globales.MiFormFacturacion.DtListaItems.Rows.Add(NuevaFilaEnFacturacion);
+
+                this.DialogResult = DialogResult.OK;
+            }
         }
     }
 }

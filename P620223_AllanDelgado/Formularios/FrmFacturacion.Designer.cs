@@ -449,6 +449,7 @@
             this.BtnCrearFactura.TabIndex = 3;
             this.BtnCrearFactura.Text = "Crear Factura";
             this.BtnCrearFactura.UseVisualStyleBackColor = false;
+            this.BtnCrearFactura.Click += new System.EventHandler(this.BtnCrearFactura_Click);
             // 
             // FrmFacturacion
             // 
